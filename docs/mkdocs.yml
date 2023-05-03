@@ -1,0 +1,62 @@
+site_name: PortfolioAP Doc
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - navigation.tabs
+    - navigation.expand
+    - navigation.indexes
+    - navigation.sections
+    - toc.follow
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.annotation
+    - content.code.copy
+  language: es
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/weather-night
+        name: Cambio a Modo Oscuro
+      primary: red
+      accent: amber
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Cambio a Modo Claro
+      primary: red
+      accent: deep purple
+nav:
+  - Inicio:
+    - index.md
+  - Instalacion:
+    - setup/index.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/Alandcejas01
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/in/alandcejas01/
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+copyright: |
+  &copy: 2023 <a href"https://github.com/Alandcejas01" target="_blank" rel="noopener">Alan Cejas</a>
