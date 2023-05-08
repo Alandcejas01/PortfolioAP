@@ -1,7 +1,5 @@
 package com.arg.backend.repositories;
 
-
-import com.arg.backend.entities.Education;
 import com.arg.backend.entities.Skill;
 import java.util.List;
 import java.util.Optional;
