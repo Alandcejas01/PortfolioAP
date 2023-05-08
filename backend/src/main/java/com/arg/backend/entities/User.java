@@ -62,6 +62,10 @@ public class User implements UserDetails {
   @JsonIgnore
   private List<WorkExperience> workExperiences = new ArrayList<>();
 
+  @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JsonIgnore
+  private List<Education> educations = new ArrayList<>();
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(role.name()));
@@ -127,6 +131,7 @@ public class User implements UserDetails {
     private String description;
     private String imgUrl;
     private List<WorkExperience.WorkExperienceDto> workExperiences = new ArrayList<>();
+    private List<Education.EducationDto> educations = new ArrayList<>();
   }
 
 }
