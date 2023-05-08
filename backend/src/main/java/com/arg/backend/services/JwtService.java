@@ -14,6 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
+/**
+ * Servicio encargado de generar y verificar JWT tokens.
+ */
 @Service
 public class JwtService {
 
@@ -33,6 +36,13 @@ public class JwtService {
     return generateToken(new HashMap<>(), userDetails);
   }
 
+  /**
+   * Método para generar el token JWT. atraves de los siguientes parametros.
+   *
+   * @param extraClaims agregara datos adicionales al token jwt.
+   * @param userDetails contiene informacion del usuario para generar el token jwt.
+   * @return token JWT.
+   */
   public String generateToken(
       Map<String, Object> extraClaims,
       UserDetails userDetails

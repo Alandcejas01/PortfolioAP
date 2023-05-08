@@ -14,11 +14,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
+/**
+ * Configuracion de beans para la autenticación JWT.
+ */
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfig {
   private final UserService userService;
 
+  /**
+   * Busca el usuario a traves del correo electronico y lanza una excepción si no lo encuentra.
+   *
+   * @return {@link com.arg.backend.entities.User} o {@link UsernameNotFoundException}.
+   */
   @Bean
   public UserDetailsService userDetailsService() {
 
@@ -26,6 +34,11 @@ public class ApplicationConfig {
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
   }
 
+  /**
+   * Define una instancia de AuthenticationProvider que se utiliza para autenticar a los usuarios.
+   *
+   * @return {@link AuthenticationProvider}.
+   */
   @Bean
   public AuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -35,7 +48,8 @@ public class ApplicationConfig {
   }
 
   @Bean
-  public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+  public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
+          throws Exception {
     return config.getAuthenticationManager();
   }
 

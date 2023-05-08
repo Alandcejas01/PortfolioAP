@@ -1,13 +1,18 @@
 package com.arg.backend.entities;
 
 import com.arg.backend.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -22,7 +27,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 /**
  *  Esta clase hace referencia a la entidad Usuario de la bases de datos.
- *  Posee los metodos para la autenticación en JWT.
+ *  implementa la interfaz {@link UserDetails} para poseer los
+ *  metodos necesarios para la autenticación en JWT.
  */
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,12 +45,22 @@ public class User implements UserDetails {
 
   private String fullName;
 
-  private String password;
+  private String subject;
+
+  private String description;
+
+  private String imgUrl;
 
   private String email;
 
+  private String password;
+
   @Enumerated(EnumType.STRING)
   private Role role;
+
+  @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JsonIgnore
+  private List<WorkExperience> workExperiences = new ArrayList<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -80,4 +96,37 @@ public class User implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+
+
+  /**
+   * Dto para la autenticación del usuario.
+   */
+  @Getter
+  @Setter
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class UserAuthentication {
+    private String fullName;
+    private String email;
+    private String password;
+    private Role role;
+  }
+
+  /**
+   * Dto para la manipulación de datos en el CRUD.
+   */
+  @Getter
+  @Setter
+  @AllArgsConstructor
+  @NoArgsConstructor
+  public static class UserDto {
+
+    private Long id;
+    private String fullName;
+    private String subject;
+    private String description;
+    private String imgUrl;
+    private List<WorkExperience.WorkExperienceDto> workExperiences = new ArrayList<>();
+  }
+
 }

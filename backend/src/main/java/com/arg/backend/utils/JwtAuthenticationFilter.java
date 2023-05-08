@@ -16,7 +16,10 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
+/**
+ * Filtro para interceptar las solicitudes y verificar si tienen token JWT valido, si es asi
+ * autentica el usuario y lo guarda en el contexto de seguridad de spring security.
+ */
 @Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

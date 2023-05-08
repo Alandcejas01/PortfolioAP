@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+/**
+ * Controlador de excepciones para los controllers Rest para el manejo de errores en la aplicación.
+ */
 @RestControllerAdvice
 public class ControllerAdvice {
 

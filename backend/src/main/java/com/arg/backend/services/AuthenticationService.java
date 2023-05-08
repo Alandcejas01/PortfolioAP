@@ -1,6 +1,5 @@
 package com.arg.backend.services;
 
-import com.arg.backend.dtos.UserDto;
 import com.arg.backend.dtos.auth.AuthenticationRequestDto;
 import com.arg.backend.dtos.auth.AuthenticationResponseDto;
 import com.arg.backend.dtos.auth.RegisterRequestDto;
@@ -15,6 +14,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+/**
+ * Servicio para el registro y autenticación de la aplicación.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -24,6 +27,13 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
   ModelMapper mapper = new ModelMapper();
 
+  /**
+   * Este método se encarga de registrar al usuario en la bases de datos
+   * y returnar el token jwt.
+   *
+   * @param request con datos del registro del usuario.
+   * @return JWT token.
+   */
   public AuthenticationResponseDto register(RegisterRequestDto request) {
 
     Optional<User> userExist = userService.findByEmail(request.getEmail());
@@ -38,7 +48,7 @@ public class AuthenticationService {
         .role(Role.ADMIN)
         .build();
 
-    userService.save(mapper.map(user, UserDto.class));
+    userService.save(mapper.map(user, User.UserAuthentication.class));
 
     String jwtToken = jwtService.generateToken(user);
 
@@ -47,6 +57,13 @@ public class AuthenticationService {
         .build();
   }
 
+  /**
+   * Este método se encarga de autenticar el usuario obtenido
+   * y devolver el jwt si la autenticacion es correcta.
+   *
+   * @param request contiene datos del login del Usuario.
+   * @return JWT token.
+   */
   public AuthenticationResponseDto authenticate(AuthenticationRequestDto request) {
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(

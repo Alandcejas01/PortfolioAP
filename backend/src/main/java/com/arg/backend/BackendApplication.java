@@ -3,6 +3,9 @@ package com.arg.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Iniciador de la aplicación.
+ */
 @SpringBootApplication
 public class BackendApplication {
 
