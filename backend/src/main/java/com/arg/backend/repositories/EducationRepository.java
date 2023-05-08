@@ -2,7 +2,6 @@ package com.arg.backend.repositories;
 
 
 import com.arg.backend.entities.Education;
-import com.arg.backend.entities.WorkExperience;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
