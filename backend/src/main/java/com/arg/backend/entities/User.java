@@ -51,6 +51,8 @@ public class User implements UserDetails {
 
   private String imgUrl;
 
+  private String cvUrl;
+
   private String email;
 
   private String password;
@@ -69,6 +71,10 @@ public class User implements UserDetails {
   @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   @JsonIgnore
   private List<Skill> skills = new ArrayList<>();
+
+  @OneToMany(mappedBy = "userId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JsonIgnore
+  private List<Project> projects = new ArrayList<>();
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -134,9 +140,11 @@ public class User implements UserDetails {
     private String subject;
     private String description;
     private String imgUrl;
+    private String cvUrl;
     private List<WorkExperience.WorkExperienceDto> workExperiences = new ArrayList<>();
     private List<Education.EducationDto> educations = new ArrayList<>();
     private List<Skill.SkillDto> skills = new ArrayList<>();
+    private List<Project.ProjectDto> projects = new ArrayList<>();
   }
 
 }
